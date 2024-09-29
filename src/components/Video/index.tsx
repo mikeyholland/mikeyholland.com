@@ -17,9 +17,6 @@ export default function Video({ video }: { video: videoType }) {
   const [videoLoading, setVideoLoading] = useState<boolean>(true);
   const [pulsing, setPulsing] = useState<boolean>(true);
   const { textColor } = useContext(TextContext);
-  // const aspectRatioString = video.data.aspect_ratio;
-  // const aspectRatioArray = aspectRatioString.split(':');
-  // const aspectRatio = `${aspectRatioArray[0]} / ${aspectRatioArray[1]} `;
 
   const videoLoaded = () => {
     setVideoLoading(false);

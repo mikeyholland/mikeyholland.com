@@ -30,7 +30,6 @@ export const aboutType = defineType({
       title: 'About',
       name: 'about',
       type: 'array',
-      // of: [{ type: 'block' }],
       of: [
         {
           title: 'Block',
@@ -50,7 +49,6 @@ export const aboutType = defineType({
       title: 'How I work',
       name: 'how',
       type: 'array',
-      // of: [{ type: 'block' }],
       of: [
         {
           title: 'Block',
