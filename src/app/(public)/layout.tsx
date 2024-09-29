@@ -16,7 +16,9 @@ export default async function ClientLayout({
 }>) {
   return (
     <>
-      <GoogleAnalytics gaId="G-MXGVPJYR2K" />
+      <GoogleAnalytics
+        gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID as string}
+      />
       <SmoothScrolling>{children}</SmoothScrolling>;
     </>
   );
