@@ -56,7 +56,7 @@ export default async function About() {
           <RichText value={how} />
         </div>
       </div>
-      <div>
+      {/* <div>
         <div className="max-w-prose">
           <Skills
             heading="Skills / Key Technologies"
@@ -64,7 +64,7 @@ export default async function About() {
             intro={techIntro}
           />
         </div>
-      </div>
+      </div> */}
     </Section>
   );
 }

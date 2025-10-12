@@ -31,10 +31,10 @@ export const Section = forwardRef<HTMLElement, SectionType>(
     return (
       <section
         ref={ref}
-        className="w-full flex items-center md:min-h-screen first:mt-0 px-4 py-6 my-56 md:px-8 md:my-96 md:first:py-24 last:md:py-0 last:mb-0"
+        className="w-full flex items-center md:min-h-[500vh] first:mt-0 px-4 py-6 my-56 md:px-8 md:my-96 md:first:py-24 last:md:py-0 last:mb-0"
       >
         <span ref={inViewRef} />
-        <div className={clsx('', className)}>{children}</div>
+        <div className={clsx('sticky top-32 mb-64', className)}>{children}</div>
       </section>
     );
   },

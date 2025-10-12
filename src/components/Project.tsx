@@ -13,6 +13,7 @@ import Skills from './Skills';
 import ArrowRight from './icons/ArrowRight';
 import RichText from './RichText';
 import Video from './Video';
+import HorizontalScroll from './HorizontalScroll';
 
 export type VideoType = {
   asset: {
@@ -80,7 +81,7 @@ const Project = ({ project }: { project: ProjectType }) => {
       ref={ref}
       bgColor={project.brand ? project.brand : '#ffffff'}
       textColor={project.textColor}
-      className="flex items-center"
+      className="relative"
     >
       <motion.div
         initial="hidden"
@@ -92,19 +93,18 @@ const Project = ({ project }: { project: ProjectType }) => {
         variants={parentAnimation}
         className="lg:flex items-center gap-12"
       >
-        <motion.div
-          className="lg:w-1/3 flex flex-col mb-10"
-          variants={childAnimation}
-        >
+        <motion.div className="" variants={childAnimation}>
           <h2 className="font-bold text-3xl md:text-5xl mb-4">
             {project.name}
           </h2>
-          <RichText value={project.info} className="mb-4" />
-          <Skills
-            heading="Key tech"
-            items={project?.keyTech}
-            className="mb-6"
-          />
+          <div className="flex gap-12">
+            <RichText value={project.info} className="mb-4" />
+            <Skills
+              heading="Key tech"
+              items={project?.keyTech}
+              className="mb-6"
+            />
+          </div>
           <div>
             <a
               target="_blank"
@@ -134,7 +134,7 @@ const Project = ({ project }: { project: ProjectType }) => {
             </a>
           </div>
         </motion.div>
-        <div className="lg:w-2/3">
+        {/* <div className="lg:w-2/3">
           <Swiper
             slidesPerView="auto"
             modules={[FreeMode]}
@@ -155,8 +155,21 @@ const Project = ({ project }: { project: ProjectType }) => {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
+        </div> */}
       </motion.div>
+      <HorizontalScroll>
+        {project?.videosWithLabels?.map((item, index: number) => (
+          <SwiperSlide
+            key={item.video.asset.assetId}
+            className="!w-auto flex items-center first:ml-0 mx-2 lg:mx-4"
+          >
+            <p className="text-xs mb-2">
+              {index + 1}. {item.title}
+            </p>
+            <Video video={item.video.asset} />
+          </SwiperSlide>
+        ))}
+      </HorizontalScroll>
     </Section>
   );
 };

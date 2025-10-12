@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useContext } from 'react';
-import MuxPlayer from '@mux/mux-player-react/lazy';
+import MuxPlayer from '@mux/mux-player-react';
 import { motion } from 'framer-motion';
 import clsx from 'clsx';
 
