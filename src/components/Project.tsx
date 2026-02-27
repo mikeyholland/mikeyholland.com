@@ -1,19 +1,16 @@
 'use client';
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { PortableTextBlock } from 'next-sanity';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { FreeMode } from 'swiper/modules';
-import { useAnimationControls, motion, useInView } from 'framer-motion';
+import { useAnimationControls, useInView } from 'framer-motion';
 import clsx from 'clsx';
-import 'swiper/css';
 
-import { Section } from './Section';
-import Skills from './Skills';
-import ArrowRight from './icons/ArrowRight';
-import RichText from './RichText';
-import Video from './Video';
-import HorizontalScroll from './HorizontalScroll';
+import { Section } from 'src/components/Section';
+import Skills from 'src/components/Skills';
+import ArrowRight from 'src/components/icons/ArrowRight';
+import RichText from 'src/components/RichText';
+import Video from 'src/components/Video';
+import HorizontalScroll from 'src/components/HorizontalScroll';
 
 export type VideoType = {
   asset: {
@@ -34,18 +31,35 @@ export type ProjectType = {
   url: string;
   info: PortableTextBlock;
   keyTech: string[];
-  videos: VideoType[];
   videosWithLabels: VideosWithLabels[];
 };
 
-const Project = ({ project }: { project: ProjectType }) => {
+const Project = ({
+  project,
+  zIndex = 10,
+}: {
+  project: ProjectType;
+  zIndex?: number;
+}) => {
   const ref = useRef<HTMLElement>(null);
   const ctrls = useAnimationControls();
+  const [isMobile, setIsMobile] = useState(false);
 
   const isInView = useInView(ref, {
     once: true,
-    amount: 0.25,
+    margin: '-100px 0px -300px 0px',
   });
+
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (isInView) {
@@ -56,118 +70,79 @@ const Project = ({ project }: { project: ProjectType }) => {
     }
   }, [ctrls, isInView]);
 
-  const parentAnimation = {
-    hidden: {},
-    visible: {},
-  };
-
-  const childAnimation = {
-    hidden: {
-      opacity: 0,
-      y: '50px',
-    },
-    visible: {
-      opacity: 1,
-      y: '0',
-      transition: {
-        duration: 1.8,
-        ease: [0.075, 0.82, 0.165, 1],
-      },
-    },
-  };
-
   return (
     <Section
       ref={ref}
       bgColor={project.brand ? project.brand : '#ffffff'}
       textColor={project.textColor}
-      className="relative"
     >
-      <motion.div
-        initial="hidden"
-        animate={ctrls}
-        transition={{
-          delayChildren: 0.25,
-          staggerChildren: 0.35,
-        }}
-        variants={parentAnimation}
-        className="lg:flex items-center gap-12"
-      >
-        <motion.div className="" variants={childAnimation}>
-          <h2 className="font-bold text-3xl md:text-5xl mb-4">
-            {project.name}
-          </h2>
-          <div className="flex gap-12">
-            <RichText value={project.info} className="mb-4" />
-            <Skills
-              heading="Key tech"
-              items={project?.keyTech}
-              className="mb-6"
-            />
-          </div>
-          <div>
-            <a
-              target="_blank"
-              href={project.url}
-              rel="noopener noreferrer"
-              className="inline-flex items-center w-auto group"
-            >
-              <span>
-                View project
-                <span
-                  className={clsx(
-                    'block max-w-0 group-hover:max-w-full transition-all h-0.5 mt-px',
-                    project.textColor === 'White'
-                      ? 'bg-white'
-                      : 'bg-eerieBlack',
-                  )}
+      <HorizontalScroll
+        zIndex={zIndex}
+        topContent={
+          isMobile ? (
+            <div className="mb-4">
+              <h2 className="font-bold text-3xl mb-4">{project.name}</h2>
+            </div>
+          ) : (
+            <h2 className="font-bold text-3xl md:text-5xl mb-4">
+              {project.name}
+            </h2>
+          )
+        }
+        bottomContent={
+          <div className="mt-6 md:mb-8">
+            <div className="md:flex md:gap-12">
+              <div className="flex flex-col mb-4">
+                <RichText
+                  value={project.info}
+                  className="mb-2 text-sm md:text-base"
                 />
-              </span>
-              <ArrowRight
-                className={clsx(
-                  'w-5 h-5 ml-1 group-hover:translate-x-0.5 transition',
-                  project.textColor === 'White'
-                    ? 'fill-white'
-                    : 'fill-eerieBlack',
-                )}
+                <a
+                  target="_blank"
+                  href={project.url}
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center w-auto group mb-4"
+                >
+                  <span className="inline-flex items-center">
+                    Visit project
+                    <span
+                      className={clsx(
+                        'block max-w-0 group-hover:max-w-full transition-all h-0.5 mt-px',
+                        project.textColor === 'White'
+                          ? 'bg-white'
+                          : 'bg-eerieBlack',
+                      )}
+                    />
+                  </span>
+                  <ArrowRight
+                    className={clsx(
+                      'w-5 h-5 ml-1 group-hover:translate-x-0.5 transition',
+                      project.textColor === 'White'
+                        ? 'fill-white'
+                        : 'fill-eerieBlack',
+                    )}
+                  />
+                </a>
+              </div>
+              <Skills
+                heading="Key tech"
+                items={project?.keyTech}
+                className="md:mb-6"
               />
-            </a>
+            </div>
           </div>
-        </motion.div>
-        {/* <div className="lg:w-2/3">
-          <Swiper
-            slidesPerView="auto"
-            modules={[FreeMode]}
-            observer
-            observeParents
-            freeMode={{ enabled: true, momentumBounce: true }}
-            className="flex items-center !-ml-4 px-4 translate-x-4 lg:px-8 md:translate-x-8 lg:translate-x-8 cursor-drag"
-          >
-            {project?.videosWithLabels?.map((item, index: number) => (
-              <SwiperSlide
-                key={item.video.asset.assetId}
-                className="!w-auto flex items-center first:ml-0 mx-2 lg:mx-4"
-              >
-                <p className="text-xs mb-2">
-                  {index + 1}. {item.title}
-                </p>
-                <Video video={item.video.asset} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        </div> */}
-      </motion.div>
-      <HorizontalScroll>
+        }
+      >
         {project?.videosWithLabels?.map((item, index: number) => (
-          <SwiperSlide
+          <div
             key={item.video.asset.assetId}
-            className="!w-auto flex items-center first:ml-0 mx-2 lg:mx-4"
+            className="!w-auto h-full shrink-0 flex flex-col items-start first:ml-0 mx-2 lg:mx-4"
           >
             <p className="text-xs mb-2">
               {index + 1}. {item.title}
             </p>
             <Video video={item.video.asset} />
-          </SwiperSlide>
+          </div>
         ))}
       </HorizontalScroll>
     </Section>

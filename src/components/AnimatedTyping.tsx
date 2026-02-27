@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Typed from 'typed.js';
 
 const AnimatedTypingComponent = ({
@@ -11,6 +11,7 @@ const AnimatedTypingComponent = ({
   className?: string;
 }) => {
   const el = useRef(null);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const typed = new Typed(el.current, {
@@ -18,6 +19,7 @@ const AnimatedTypingComponent = ({
       typeSpeed: 50,
       loop: true,
     });
+    setLoaded(true);
 
     return () => {
       typed.destroy();
@@ -26,7 +28,8 @@ const AnimatedTypingComponent = ({
 
   return (
     <div className={className}>
-      <span ref={el} />
+      {loaded ? <span ref={el} /> : <span ref={el}>{values[0]}</span>}
+      {/* <span ref={el} /> */}
     </div>
   );
 };

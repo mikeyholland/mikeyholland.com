@@ -3,7 +3,7 @@ import React from 'react';
 import localFont from 'next/font/local';
 import Providers from '@components/Providers';
 import Background from '@components/Background';
-import '../globals.css';
+import 'src/globals.css';
 
 const satoshi = localFont({
   src: [
@@ -66,7 +66,7 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className={satoshi.className}>
+      <body className={`${satoshi.className} overflow-x-hidden`}>
         <Providers>
           <Background>{children}</Background>
         </Providers>

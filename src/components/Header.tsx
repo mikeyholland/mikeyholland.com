@@ -2,10 +2,10 @@ import React from 'react';
 import Image from 'next/image';
 import { SanityImageAssetDocument } from 'next-sanity';
 
-import AnimatedTypingComponent from './AnimatedTyping';
-import GithubIcon from './icons/GithubIcon';
-import LinkedInIcon from './icons/LinkedInIcon';
-import YunoJunoIcon from './icons/YunoJunoIcon';
+import AnimatedTypingComponent from '@components/AnimatedTyping';
+import GithubIcon from '@components/icons/GithubIcon';
+import LinkedInIcon from '@components/icons/LinkedInIcon';
+import YunoJunoIcon from '@components/icons/YunoJunoIcon';
 
 export default function Header({
   name,
@@ -25,7 +25,7 @@ export default function Header({
           <Image
             src={imageUrl}
             alt={name}
-            className="w-full block object-cover object-center "
+            className="w-full block object-cover object-center"
             fill
             placeholder="blur"
             blurDataURL={image.asset.metadata.lqip}
@@ -45,7 +45,7 @@ export default function Header({
           <ul className="flex flex-wrap items-center gap-2 md:gap-4">
             <li className="w-full md:w-auto">
               <a className="underline" href="mailto:mpjholland@gmail.com">
-                mpjholland@gmail.com
+                hello@mikeyholland.com
               </a>
             </li>
             <li className="w-auto">

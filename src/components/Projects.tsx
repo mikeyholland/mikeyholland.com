@@ -30,7 +30,7 @@ export default async function Projects() {
     query: PROJECTS_QUERY,
   });
 
-  return projects.map((project: ProjectType) => (
-    <Project key={project.name} project={project} />
+  return projects.map((project: ProjectType, index: number) => (
+    <Project key={project.name} project={project} zIndex={1 + index} />
   ));
 }

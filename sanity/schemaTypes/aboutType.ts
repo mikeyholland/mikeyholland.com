@@ -83,11 +83,5 @@ export const aboutType = defineType({
         },
       ],
     }),
-    defineField({
-      title: 'Skills / Key Technologies',
-      name: 'tech',
-      type: 'array',
-      of: [{ type: 'string' }],
-    }),
   ],
 });

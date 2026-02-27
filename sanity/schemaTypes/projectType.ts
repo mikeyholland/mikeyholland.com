@@ -48,12 +48,6 @@ export const projectType = defineType({
       of: [{ type: 'string' }],
     }),
     defineField({
-      title: 'Videos',
-      name: 'videos',
-      type: 'array',
-      of: [{ type: 'mux.video' }],
-    }),
-    defineField({
       title: 'Videos with labels',
       name: 'videosWithLabels',
       type: 'array',
