@@ -20,6 +20,7 @@ export default function HorizontalScroll({
   const [scrollDistance, setScrollDistance] = useState(0);
   const [stickyHeight, setStickyHeight] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [stickyTop, setStickyTop] = useState(32);
 
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -31,16 +32,27 @@ export default function HorizontalScroll({
       if (scrollPaneRef.current && stickyRef.current) {
         const { scrollWidth } = scrollPaneRef.current;
         const viewportWidth = window.innerWidth;
+        const viewportHeight = document.documentElement.clientHeight;
 
-        setIsMobile(viewportWidth < 768);
+        const mobile = viewportWidth < 768;
+        setIsMobile(mobile);
 
-        const buffer = isMobile ? 25 : 75;
+        const buffer = mobile ? 25 : 75;
         const distance = scrollWidth - viewportWidth + buffer;
         setScrollDistance(distance);
 
-        // Measure the actual height of sticky content
         const contentHeight = stickyRef.current.offsetHeight;
         setStickyHeight(contentHeight);
+
+        if (!mobile) {
+          const desiredTopRatio = viewportWidth >= 1280 ? 0.1 : 0.05;
+          const desiredTop = viewportHeight * desiredTopRatio;
+          const padding = 16;
+          const maxTop = Math.max(padding, viewportHeight - contentHeight - padding);
+          setStickyTop(Math.round(Math.min(desiredTop, maxTop)));
+        } else {
+          setStickyTop(32);
+        }
       }
     };
 
@@ -57,7 +69,7 @@ export default function HorizontalScroll({
       clearTimeout(timeoutId2);
       clearTimeout(timeoutId3);
     };
-  }, [children, topContent, bottomContent, isMobile]);
+  }, [children, topContent, bottomContent]);
 
   const x = useTransform(scrollYProgress, [0, 1], [0, -scrollDistance]);
 
@@ -66,7 +78,9 @@ export default function HorizontalScroll({
   const containerHeight = isMobile
     ? scrollDistance + stickyHeight
     : scrollDistance +
-      (typeof window !== 'undefined' ? window.innerHeight * 2 : 0);
+      (typeof window !== 'undefined'
+        ? document.documentElement.clientHeight * 2
+        : 0);
 
   return (
     <div
@@ -78,8 +92,8 @@ export default function HorizontalScroll({
     >
       <div
         ref={stickyRef}
-        className="sticky top-8 md:top-[5%] xl:top-[10%]"
-        style={{ zIndex }}
+        className="sticky"
+        style={{ zIndex, top: stickyTop }}
       >
         {topContent}
         {!isMobile && bottomContent}

@@ -92,7 +92,7 @@ const Project = ({
         bottomContent={
           <div className="mt-6 md:mb-8">
             <div className="md:flex md:gap-12">
-              <div className="flex flex-col mb-4">
+              <div className="flex flex-col mb-4 max-w-prose">
                 <RichText
                   value={project.info}
                   className="mb-2 text-sm md:text-base"

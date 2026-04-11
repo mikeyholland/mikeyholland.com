@@ -5,7 +5,9 @@ export default async function Home() {
   return (
     <>
       <About />
-      <Projects />
+      <div className="pb-12">
+        <Projects />
+      </div>
     </>
   );
 }
