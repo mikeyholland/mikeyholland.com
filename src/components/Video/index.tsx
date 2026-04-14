@@ -22,7 +22,7 @@ export default function Video({ video }: { video: videoType }) {
         textColor === 'Black' ? 'bg-eerieBlack' : 'bg-white',
       )}
     >
-      <div className="relative bg-eerieBlack md:min-w-24 h-36 xs:h-44 md:h-64 lg:h-72 xl:h-96 flex items-center">
+      <div className="relative bg-eerieBlack md:min-w-24 h-36 xs:h-44 md:h-64 lg:h-72 xl:h-88 flex items-center">
         <MuxPlayer
           playbackId={video?.playbackId}
           loop
@@ -31,7 +31,7 @@ export default function Video({ video }: { video: videoType }) {
           streamType="live"
           className={clsx(
             MuxPlayerStyles.muxPlayer,
-            'w-full h-36 xs:h-44 md:h-64 lg:h-72 xl:h-96',
+            'w-full h-36 xs:h-44 md:h-64 lg:h-72 xl:h-88',
           )}
         />
       </div>
