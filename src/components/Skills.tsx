@@ -31,10 +31,10 @@ export default function Skills({
             <li
               key={item}
               className={clsx(
-                'p-2 rounded font-bold text-xs md:text-base',
+                'p-2 rounded font-bold text-xs md:text-base transition-colors cursor-default',
                 textColor === 'Black'
-                  ? 'bg-eerieBlack text-white'
-                  : 'bg-white text-eerieBlack',
+                  ? 'bg-eerieBlack text-white hover:bg-persianGreen'
+                  : 'bg-white text-eerieBlack hover:bg-persianGreen hover:text-white',
               )}
             >
               {item}

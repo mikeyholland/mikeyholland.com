@@ -37,9 +37,11 @@ export type ProjectType = {
 const Project = ({
   project,
   zIndex = 10,
+  index = 0,
 }: {
   project: ProjectType;
   zIndex?: number;
+  index?: number;
 }) => {
   const ref = useRef<HTMLElement>(null);
   const ctrls = useAnimationControls();
@@ -70,6 +72,8 @@ const Project = ({
     }
   }, [ctrls, isInView]);
 
+  const indexLabel = String(index + 1).padStart(2, '0');
+
   return (
     <Section
       ref={ref}
@@ -78,15 +82,22 @@ const Project = ({
     >
       <HorizontalScroll
         zIndex={zIndex}
+        showScrollHint={index === 0}
         topContent={
           isMobile ? (
             <div className="mb-4">
-              <h2 className="font-bold text-3xl mb-4">{project.name}</h2>
+              <div className="flex items-baseline gap-2 mb-1">
+                <span className="text-xs font-bold opacity-30 tabular-nums">{indexLabel}</span>
+                <h2 className="font-bold text-3xl">{project.name}</h2>
+              </div>
             </div>
           ) : (
-            <h2 className="font-bold text-3xl md:text-5xl mb-4">
-              {project.name}
-            </h2>
+            <div className="mb-4">
+              <div className="flex items-baseline gap-3">
+                <span className="text-base font-bold opacity-30 tabular-nums -mb-1">{indexLabel}</span>
+                <h2 className="font-bold text-3xl md:text-5xl">{project.name}</h2>
+              </div>
+            </div>
           )
         }
         bottomContent={
@@ -110,7 +121,7 @@ const Project = ({
                         'block max-w-0 group-hover:max-w-full transition-all h-0.5 mt-px',
                         project.textColor === 'White'
                           ? 'bg-white'
-                          : 'bg-eerieBlack',
+                          : 'bg-persianGreen',
                       )}
                     />
                   </span>
@@ -119,7 +130,7 @@ const Project = ({
                       'w-5 h-5 ml-1 group-hover:translate-x-0.5 transition',
                       project.textColor === 'White'
                         ? 'fill-white'
-                        : 'fill-eerieBlack',
+                        : 'fill-eerieBlack group-hover:fill-persianGreen',
                     )}
                   />
                 </a>
@@ -133,13 +144,13 @@ const Project = ({
           </div>
         }
       >
-        {project?.videosWithLabels?.map((item, index: number) => (
+        {project?.videosWithLabels?.map((item, videoIndex: number) => (
           <div
             key={item.video.asset.assetId}
             className="!w-auto h-full shrink-0 flex flex-col items-start first:ml-0 mx-2 lg:mx-4"
           >
-            <p className="text-xs mb-2">
-              {index + 1}. {item.title}
+            <p className="text-xs mb-2 font-bold opacity-50">
+              {String(videoIndex + 1).padStart(2, '0')} — {item.title}
             </p>
             <Video video={item.video.asset} />
           </div>
