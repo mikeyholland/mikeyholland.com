@@ -31,6 +31,11 @@ export default async function Projects() {
   });
 
   return projects.map((project: ProjectType, index: number) => (
-    <Project key={project.name} project={project} zIndex={1 + index} index={index} />
+    <Project
+      key={project.name}
+      project={project}
+      zIndex={1 + index}
+      index={index}
+    />
   ));
 }

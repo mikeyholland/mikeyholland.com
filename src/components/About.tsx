@@ -25,13 +25,13 @@ export default async function About() {
     query: ABOUT_QUERY,
   });
 
-  const { name, about: aboutBlock, image, jobTitles } = about;
+  const { name, about: aboutBlock, image, jobTitles, how } = about;
 
   const imageUrl = urlForImage(image);
 
   return (
     <Section bgColor="#F1FAEE" textColor="Black">
-      <div className="flex flex-col justify-center pt-[5%]">
+      <div className="flex flex-col justify-center pt-[5%] md:pt-0">
         <Header
           name={name}
           image={image}
@@ -39,8 +39,23 @@ export default async function About() {
           jobTitles={jobTitles}
         />
         <div className="lg:flex gap-12 my-6">
-          <div className="max-w-prose mb-8">
-            <RichText value={aboutBlock} className="text-sm md:text-base" />
+          <div className="lg:w-1/2 mb-8">
+            <h3 className="font-bold text-lg md:text-2xl mb-4 md:mb-8">
+              About
+            </h3>
+            <RichText
+              value={aboutBlock}
+              className="text-sm md:text-base lg:text-lg 2xl:text-xl"
+            />
+          </div>
+          <div className="lg:w-1/2 mb-8">
+            <h3 className="font-bold text-lg md:text-2xl mb-4 md:mb-8">
+              How I work
+            </h3>
+            <RichText
+              value={how}
+              className="text-sm md:text-base lg:text-lg 2xl:text-xl"
+            />
           </div>
         </div>
       </div>

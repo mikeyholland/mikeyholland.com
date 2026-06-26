@@ -82,20 +82,25 @@ const Project = ({
     >
       <HorizontalScroll
         zIndex={zIndex}
-        showScrollHint={index === 0}
         topContent={
           isMobile ? (
             <div className="mb-4">
               <div className="flex items-baseline gap-2 mb-1">
-                <span className="text-xs font-bold opacity-30 tabular-nums">{indexLabel}</span>
+                <span className="text-xs font-bold opacity-30 tabular-nums">
+                  {indexLabel}
+                </span>
                 <h2 className="font-bold text-3xl">{project.name}</h2>
               </div>
             </div>
           ) : (
             <div className="mb-4">
               <div className="flex items-baseline gap-3">
-                <span className="text-base font-bold opacity-30 tabular-nums -mb-1">{indexLabel}</span>
-                <h2 className="font-bold text-3xl md:text-5xl">{project.name}</h2>
+                <span className="text-base font-bold opacity-30 tabular-nums -mb-1">
+                  {indexLabel}
+                </span>
+                <h2 className="font-bold text-3xl md:text-5xl">
+                  {project.name}
+                </h2>
               </div>
             </div>
           )
@@ -103,37 +108,39 @@ const Project = ({
         bottomContent={
           <div className="mt-6 md:mb-8">
             <div className="md:flex md:gap-12">
-              <div className="flex flex-col mb-4 max-w-lg">
+              <div className="flex flex-col mb-4 max-w-4xl">
                 <RichText
                   value={project.info}
-                  className="mb-2 text-sm md:text-base"
+                  className="mb-2 text-sm md:text-base lg:text-lg 2xl:text-xl"
                 />
-                <a
-                  target="_blank"
-                  href={project.url}
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center w-auto group mb-4"
-                >
-                  <span className="inline-flex items-center">
-                    Visit project
-                    <span
+                {project.url && (
+                  <a
+                    target="_blank"
+                    href={project.url}
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center w-auto group mb-4"
+                  >
+                    <span className="inline-flex items-center">
+                      Visit project
+                      <span
+                        className={clsx(
+                          'block max-w-0 group-hover:max-w-full transition-all h-0.5 mt-px',
+                          project.textColor === 'White'
+                            ? 'bg-white'
+                            : 'bg-persianGreen',
+                        )}
+                      />
+                    </span>
+                    <ArrowRight
                       className={clsx(
-                        'block max-w-0 group-hover:max-w-full transition-all h-0.5 mt-px',
+                        'w-5 h-5 ml-1 group-hover:translate-x-0.5 transition',
                         project.textColor === 'White'
-                          ? 'bg-white'
-                          : 'bg-persianGreen',
+                          ? 'fill-white'
+                          : 'fill-eerieBlack group-hover:fill-persianGreen',
                       )}
                     />
-                  </span>
-                  <ArrowRight
-                    className={clsx(
-                      'w-5 h-5 ml-1 group-hover:translate-x-0.5 transition',
-                      project.textColor === 'White'
-                        ? 'fill-white'
-                        : 'fill-eerieBlack group-hover:fill-persianGreen',
-                    )}
-                  />
-                </a>
+                  </a>
+                )}
               </div>
               <Skills
                 heading="Key tech"

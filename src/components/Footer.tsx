@@ -7,7 +7,6 @@ import { BgContext } from 'src/app/context/bgContext';
 import { TextContext } from 'src/app/context/textContext';
 import GithubIcon from 'src/components/icons/GithubIcon';
 import LinkedInIcon from 'src/components/icons/LinkedInIcon';
-import YunoJunoIcon from 'src/components/icons/YunoJunoIcon';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -37,7 +36,8 @@ export default function Footer() {
       const stickyPosition = window.innerWidth < 768 ? 32 : 64;
       const triggerOffset = 400;
       const isActive =
-        rect.top <= stickyPosition + triggerOffset && rect.bottom > stickyPosition;
+        rect.top <= stickyPosition + triggerOffset &&
+        rect.bottom > stickyPosition;
 
       if (isActive) {
         setBgColor('#F1FAEE');
@@ -80,10 +80,7 @@ export default function Footer() {
 
         {/* Main CTA */}
         <div>
-          <motion.p
-            variants={fadeUp}
-            className="text-sm text-paynesGray mb-3"
-          >
+          <motion.p variants={fadeUp} className="text-sm text-paynesGray mb-3">
             Let's build something together
           </motion.p>
           <motion.a
@@ -127,17 +124,6 @@ export default function Footer() {
               >
                 <span className="sr-only">Mikey Holland on LinkedIn</span>
                 <LinkedInIcon className="w-5 h-5" />
-              </a>
-            </li>
-            <li>
-              <a
-                target="_blank"
-                href="https://app.yunojuno.com/p/mikeyholland/"
-                className="text-eerieBlack hover:text-persianGreen transition-colors block"
-                rel="noopener noreferrer"
-              >
-                <span className="sr-only">Hire Mikey Holland on YunoJuno</span>
-                <YunoJunoIcon className="w-5 h-5" />
               </a>
             </li>
           </ul>

@@ -8,7 +8,6 @@ import { motion } from 'framer-motion';
 import AnimatedTypingComponent from '@components/AnimatedTyping';
 import GithubIcon from '@components/icons/GithubIcon';
 import LinkedInIcon from '@components/icons/LinkedInIcon';
-import YunoJunoIcon from '@components/icons/YunoJunoIcon';
 
 const container = {
   hidden: {},
@@ -68,7 +67,10 @@ export default function Header({
           />
         </motion.div>
         <div className="flex flex-col gap-1">
-          <motion.h1 variants={item} className="font-bold text-3xl lg:text-7xl md:mb-2">
+          <motion.h1
+            variants={item}
+            className="font-bold text-3xl lg:text-7xl md:mb-2"
+          >
             {name}
           </motion.h1>
           <motion.h2
@@ -81,7 +83,10 @@ export default function Header({
               className="h-6 md:h-8"
             />
           </motion.h2>
-          <motion.ul variants={item} className="flex flex-wrap items-center gap-2 md:gap-4">
+          <motion.ul
+            variants={item}
+            className="flex flex-wrap items-center gap-2 md:gap-4"
+          >
             <li className="w-full md:w-auto">
               <a
                 className="underline decoration-eerieBlack/30 hover:decoration-persianGreen hover:text-persianGreen transition-colors"
@@ -108,16 +113,6 @@ export default function Header({
               >
                 <span className="sr-only">Mikey Holland on LinkedIn</span>
                 <LinkedInIcon className="w-4 h-4 md:w-7 md:h-7 rounded-full" />
-              </a>
-            </li>
-            <li className="w-auto">
-              <a
-                target="_blank"
-                href="https://app.yunojuno.com/p/mikeyholland/"
-                className="text-eerieBlack hover:text-persianGreen transition-colors block"
-              >
-                <span className="sr-only">Hire Mikey Holland on YunoJuno</span>
-                <YunoJunoIcon className="w-4 h-4 md:w-7 md:h-7 rounded-full" />
               </a>
             </li>
           </motion.ul>
