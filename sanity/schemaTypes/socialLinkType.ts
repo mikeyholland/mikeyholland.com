@@ -13,10 +13,5 @@ export const socialLinkType = defineType({
       name: 'href',
       type: 'string',
     }),
-    // defineField({
-    //   name: 'svgIcon',
-    //   title: 'SVG Icon',
-    //   type: 'inlineSvg',
-    // }),
   ],
 });

@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { PortableTextBlock } from 'next-sanity';
 
 import { TextContext } from 'src/app/context/textContext';
-import RichText from './RichText';
+import RichText from 'src/components/RichText';
 
 export default function Skills({
   heading,
@@ -31,10 +31,10 @@ export default function Skills({
             <li
               key={item}
               className={clsx(
-                'p-2 rounded font-bold text-sm md:text-base',
+                'p-2 rounded font-bold text-xs md:text-base transition-colors cursor-default',
                 textColor === 'Black'
-                  ? 'bg-eerieBlack text-white'
-                  : 'bg-white text-eerieBlack',
+                  ? 'bg-eerieBlack text-white hover:bg-persianGreen'
+                  : 'bg-white text-eerieBlack hover:bg-persianGreen hover:text-white',
               )}
             >
               {item}

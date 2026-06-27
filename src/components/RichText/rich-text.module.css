@@ -23,5 +23,9 @@
 }
 
 .richText > ul {
-  @apply list-disc list-inside;
+  @apply list-disc list-outside ml-3;
+}
+
+.richText > ul > li {
+  @apply pl-1;
 }
