@@ -38,8 +38,7 @@ export default function Footer() {
       // A fixed px offset fails on tall viewports where the footer never scrolls
       // close to the top (min rect.top = viewport_height - footer_height).
       const isActive =
-        rect.top < window.innerHeight &&
-        rect.bottom > stickyPosition;
+        rect.top < window.innerHeight && rect.bottom > stickyPosition;
 
       if (isActive) {
         setBgColor('#F1FAEE');
