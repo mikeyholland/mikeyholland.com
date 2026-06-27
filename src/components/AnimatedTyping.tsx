@@ -29,7 +29,6 @@ const AnimatedTypingComponent = ({
   return (
     <div className={className}>
       {loaded ? <span ref={el} /> : <span ref={el}>{values[0]}</span>}
-      {/* <span ref={el} /> */}
     </div>
   );
 };

@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useContext } from 'react';
 import { PortableTextBlock } from 'next-sanity';
 import { useAnimationControls, useInView } from 'framer-motion';
 import clsx from 'clsx';
 
 import { Section } from 'src/components/Section';
+import { ProjectNavContext } from 'src/app/context/projectNavContext';
 import Skills from 'src/components/Skills';
 import ArrowRight from 'src/components/icons/ArrowRight';
 import RichText from 'src/components/RichText';
@@ -46,11 +47,20 @@ const Project = ({
   const ref = useRef<HTMLElement>(null);
   const ctrls = useAnimationControls();
   const [isMobile, setIsMobile] = useState(false);
+  const { setProjects } = useContext(ProjectNavContext);
+  const sectionId = `project-${index}`;
 
   const isInView = useInView(ref, {
     once: true,
     margin: '-100px 0px -300px 0px',
   });
+
+  useEffect(() => {
+    setProjects((prev) => {
+      if (prev.some((p) => p.index === index)) return prev;
+      return [...prev, { index, color: project.brand ?? '#ffffff' }];
+    });
+  }, [index, project.brand, setProjects]);
 
   useEffect(() => {
     setIsMobile(window.innerWidth < 768);
@@ -77,6 +87,7 @@ const Project = ({
   return (
     <Section
       ref={ref}
+      id={sectionId}
       bgColor={project.brand ? project.brand : '#ffffff'}
       textColor={project.textColor}
     >

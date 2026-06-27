@@ -113,7 +113,7 @@ export default function HorizontalScroll({
         style={{ zIndex, top: stickyTop }}
       >
         {/* Top row: content + progress counter */}
-        <div className="flex items-end justify-between mb-0">
+        <div className="flex items-end justify-between mb-0 ">
           <div className="flex-1">{topContent}</div>
           {totalItems > 1 && (
             <div className="flex items-baseline gap-1 pb-4 shrink-0 ml-4 tabular-nums text-sm font-bold select-none">

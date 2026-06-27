@@ -13,6 +13,7 @@ import { BgContext } from 'src/app/context/bgContext';
 import { TextContext } from 'src/app/context/textContext';
 
 type SectionType = {
+  id?: string;
   className?: string;
   children: React.ReactNode | React.ReactNode[];
   bgColor: string;
@@ -21,7 +22,7 @@ type SectionType = {
 };
 
 export const Section = forwardRef<HTMLElement, SectionType>(
-  ({ className, children, bgColor, textColor, style }, forwardedRef) => {
+  ({ id, className, children, bgColor, textColor, style }, forwardedRef) => {
     const { setBgColor } = useContext(BgContext);
     const { setTextColor } = useContext(TextContext);
     const sectionRef = useRef<HTMLElement | null>(null);
@@ -77,10 +78,11 @@ export const Section = forwardRef<HTMLElement, SectionType>(
 
     return (
       <section
+        id={id}
         style={style}
         ref={setRefs}
         className={clsx(
-          'w-full first:mt-0 px-4 py-6 my-96 md:px-8 md:py-96 md:first:py-24 last:md:pb-0 last:mb-0 relative',
+          'w-full first:mt-0 px-4 py-6 my-96 md:px-8 md:pb-96 md:first:pb-24 last:md:pb-0 last:mb-0 relative',
           className,
         )}
       >

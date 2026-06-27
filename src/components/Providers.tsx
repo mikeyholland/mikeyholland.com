@@ -3,10 +3,15 @@
 import React, { useState, useMemo } from 'react';
 import { BgContext } from 'src/app/context/bgContext';
 import { TextContext } from 'src/app/context/textContext';
+import {
+  ProjectNavContext,
+  ProjectNavEntry,
+} from 'src/app/context/projectNavContext';
 
 export default function Providers({ children }: { children: React.ReactNode }) {
   const [bgColor, setBgColor] = useState('#F1FAEE');
   const [textColor, setTextColor] = useState('Black');
+  const [projects, setProjects] = useState<ProjectNavEntry[]>([]);
 
   const memoBgValue = useMemo(
     () => ({
@@ -27,7 +32,9 @@ export default function Providers({ children }: { children: React.ReactNode }) {
   return (
     <BgContext.Provider value={memoBgValue}>
       <TextContext.Provider value={memoTextValue}>
-        {children}
+        <ProjectNavContext.Provider value={{ projects, setProjects }}>
+          {children}
+        </ProjectNavContext.Provider>
       </TextContext.Provider>
     </BgContext.Provider>
   );

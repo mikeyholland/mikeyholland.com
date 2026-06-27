@@ -40,7 +40,7 @@ export default async function About() {
         />
         <div className="lg:flex gap-12 my-6">
           <div className="lg:w-1/2 mb-8">
-            <h3 className="font-bold text-lg md:text-2xl mb-4 md:mb-8">
+            <h3 className="font-bold text-lg md:text-2xl mb-4 md:mb-8 border-b border-burntUmber border-b-2 inline-block">
               About
             </h3>
             <RichText
@@ -49,7 +49,7 @@ export default async function About() {
             />
           </div>
           <div className="lg:w-1/2 mb-8">
-            <h3 className="font-bold text-lg md:text-2xl mb-4 md:mb-8">
+            <h3 className="font-bold text-lg md:text-2xl mb-4 md:mb-8 border-b border-burntUmber border-b-2 inline-block">
               How I work
             </h3>
             <RichText
