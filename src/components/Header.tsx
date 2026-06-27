@@ -59,7 +59,7 @@ export default function Header({
     <header className="mb-8 md:mb-12">
       <motion.div initial="hidden" animate="visible" variants={container}>
         {/* Live context — top right */}
-        <motion.div variants={item} className="flex justify-end mb-3 md:mb-5">
+        <motion.div variants={item} className="flex justify-end mb-4 md:mb-8">
           <LiveContext />
         </motion.div>
 

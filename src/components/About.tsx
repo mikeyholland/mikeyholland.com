@@ -31,7 +31,7 @@ export default async function About() {
 
   return (
     <Section bgColor="#F1FAEE" textColor="Black">
-      <div className="flex flex-col justify-center pt-[5%] md:pt-0">
+      <div className="flex flex-col justify-center">
         <Header
           name={name}
           image={image}

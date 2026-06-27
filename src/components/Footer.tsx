@@ -34,9 +34,11 @@ export default function Footer() {
     const handleScroll = () => {
       const rect = el.getBoundingClientRect();
       const stickyPosition = window.innerWidth < 768 ? 32 : 64;
-      const triggerOffset = 400;
+      // Use viewport height so footer activates when visible at any screen size.
+      // A fixed px offset fails on tall viewports where the footer never scrolls
+      // close to the top (min rect.top = viewport_height - footer_height).
       const isActive =
-        rect.top <= stickyPosition + triggerOffset &&
+        rect.top < window.innerHeight &&
         rect.bottom > stickyPosition;
 
       if (isActive) {
