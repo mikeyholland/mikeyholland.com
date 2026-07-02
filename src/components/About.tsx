@@ -30,7 +30,7 @@ export default async function About() {
   const imageUrl = urlForImage(image);
 
   return (
-    <Section bgColor="#F1FAEE" textColor="Black">
+    <Section id="about" bgColor="#F1FAEE" textColor="Black">
       <div className="flex flex-col justify-center">
         <Header
           name={name}
