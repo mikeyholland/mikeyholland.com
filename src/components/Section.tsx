@@ -82,7 +82,7 @@ export const Section = forwardRef<HTMLElement, SectionType>(
         style={style}
         ref={setRefs}
         className={clsx(
-          'w-full first:mt-0 px-4 py-6 my-96 md:px-8 md:pb-96 md:first:pb-24 last:md:pb-0 last:mb-0 relative',
+          'w-full first:mt-0 first:mb-56 px-4 py-6 my-96 md:px-8 md:pb-96 md:first:pb-24 last:md:pb-0 last:mb-0 relative',
           className,
         )}
       >

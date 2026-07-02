@@ -70,7 +70,7 @@ export default function HorizontalScroll({
           );
           setStickyTop(Math.round(Math.min(desiredTop, maxTop)));
         } else {
-          setStickyTop(32);
+          setStickyTop(56);
         }
       }
     };
@@ -128,7 +128,7 @@ export default function HorizontalScroll({
 
         {!isMobile && bottomContent}
 
-        <div className="flex items-center overflow-hidden -mx-8 px-8">
+        <div className="flex items-center overflow-hidden -mx-4 px-4 md:-mx-8 md:px-8">
           <motion.div
             ref={scrollPaneRef}
             style={{ x }}

@@ -38,14 +38,14 @@ export default async function About() {
           imageUrl={imageUrl}
           jobTitles={jobTitles}
         />
-        <div className="lg:flex gap-12 my-6">
+        <div className="lg:flex gap-12 mb-6 md:my-4">
           <div className="lg:w-1/2 mb-8">
             <h3 className="font-bold text-lg md:text-2xl mb-4 md:mb-8 border-b border-burntUmber border-b-2 inline-block">
               About
             </h3>
             <RichText
               value={aboutBlock}
-              className="text-sm md:text-base lg:text-lg 2xl:text-xl"
+              className="md:text-base lg:text-lg 2xl:text-xl"
             />
           </div>
           <div className="lg:w-1/2 mb-8">
@@ -54,7 +54,7 @@ export default async function About() {
             </h3>
             <RichText
               value={how}
-              className="text-sm md:text-base lg:text-lg 2xl:text-xl"
+              className="md:text-base lg:text-lg 2xl:text-xl"
             />
           </div>
         </div>

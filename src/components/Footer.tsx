@@ -66,7 +66,7 @@ export default function Footer() {
         whileInView="visible"
         viewport={{ once: true, margin: '-80px' }}
         variants={stagger}
-        className="flex flex-col gap-10"
+        className="flex flex-col gap-4"
       >
         {/* Available for work indicator */}
         <motion.div variants={fadeUp} className="flex items-center gap-2">
