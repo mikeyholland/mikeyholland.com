@@ -31,7 +31,7 @@ const nameItem = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.25, ease: [0.22, 1, 0.36, 1] },
   },
 };
 
@@ -56,7 +56,7 @@ export default function Header({
   jobTitles: string[];
 }) {
   return (
-    <header className="mb-8 md:mb-12">
+    <header className="mb-8">
       <motion.div initial="hidden" animate="visible" variants={container}>
         {/* Live context — top right */}
         <motion.div variants={item} className="flex justify-end mb-4 md:mb-8">
@@ -72,6 +72,13 @@ export default function Header({
           {name}
         </motion.h1>
 
+        <h2
+          className="text-burntUmber italic text-lg md:hidden mb-2"
+          aria-label={jobTitles[0]}
+        >
+          <AnimatedTypingComponent values={jobTitles} className="md:h-6" />
+        </h2>
+
         {/* Photo + subtitle + links */}
         <motion.div
           variants={item}
@@ -79,7 +86,7 @@ export default function Header({
         >
           <motion.div
             variants={imageItem}
-            className="relative shrink-0 w-10 h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-full overflow-hidden"
+            className="relative shrink-0 w-12 h-12 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-full overflow-hidden"
           >
             <Image
               src={imageUrl}
@@ -91,15 +98,12 @@ export default function Header({
             />
           </motion.div>
 
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col md:gap-1.5">
             <h2
-              className="text-burntUmber italic text-sm md:text-base lg:text-xl"
+              className="text-burntUmber italic hidden md:block md:text-base lg:text-xl"
               aria-label={jobTitles[0]}
             >
-              <AnimatedTypingComponent
-                values={jobTitles}
-                className="h-5 md:h-6"
-              />
+              <AnimatedTypingComponent values={jobTitles} className="md:h-6" />
             </h2>
             <ul className="flex flex-wrap items-center gap-2 md:gap-4">
               <li className="w-full md:w-auto">

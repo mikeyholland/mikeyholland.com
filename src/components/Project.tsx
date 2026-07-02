@@ -113,7 +113,7 @@ const Project = ({
               <div className="flex flex-col mb-4 max-w-4xl">
                 <RichText
                   value={project.info}
-                  className="mb-2 text-sm md:text-base lg:text-lg 2xl:text-xl"
+                  className="mb-2 lg:text-lg 2xl:text-xl"
                 />
                 {project.url && (
                   <a

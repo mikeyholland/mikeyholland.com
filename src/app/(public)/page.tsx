@@ -1,6 +1,7 @@
 import About from '@components/About';
 import Projects from '@components/Projects';
 import Footer from '@components/Footer';
+import ScrollArrows from '@components/ScrollArrows';
 
 export default async function Home() {
   return (
@@ -10,6 +11,7 @@ export default async function Home() {
         <Projects />
       </div>
       <Footer />
+      <ScrollArrows />
     </>
   );
 }
