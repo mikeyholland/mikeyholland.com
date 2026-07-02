@@ -7,13 +7,16 @@ import { TextContext } from 'src/app/context/textContext';
 export default function Providers({ children }: { children: React.ReactNode }) {
   const [bgColor, setBgColor] = useState('#F1FAEE');
   const [textColor, setTextColor] = useState('Black');
+  const [footerActive, setFooterActive] = useState(false);
 
   const memoBgValue = useMemo(
     () => ({
       bgColor,
       setBgColor,
+      footerActive,
+      setFooterActive,
     }),
-    [bgColor],
+    [bgColor, footerActive],
   );
 
   const memoTextValue = useMemo(

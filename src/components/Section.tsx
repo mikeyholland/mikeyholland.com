@@ -23,7 +23,7 @@ type SectionType = {
 
 export const Section = forwardRef<HTMLElement, SectionType>(
   ({ id, className, children, bgColor, textColor, style }, forwardedRef) => {
-    const { setBgColor } = useContext(BgContext);
+    const { setBgColor, footerActive } = useContext(BgContext);
     const { setTextColor } = useContext(TextContext);
     const sectionRef = useRef<HTMLElement | null>(null);
     const [isActive, setIsActive] = useState(false);
@@ -34,13 +34,9 @@ export const Section = forwardRef<HTMLElement, SectionType>(
 
       const handleScroll = () => {
         const rect = element.getBoundingClientRect();
-        // top-8 = 32px on mobile, top-16 = 64px on desktop
         const stickyPosition = window.innerWidth < 768 ? 32 : 64;
-        // Trigger earlier by adding offset (trigger when section is 400px away from sticky position)
         const triggerOffset = 400;
 
-        // Section is active if its top is approaching or past sticky position
-        // and its bottom is below sticky position
         const isNowActive =
           rect.top <= stickyPosition + triggerOffset &&
           rect.bottom > stickyPosition;
@@ -48,7 +44,7 @@ export const Section = forwardRef<HTMLElement, SectionType>(
         setIsActive(isNowActive);
       };
 
-      handleScroll(); // Check initial state
+      handleScroll();
       window.addEventListener('scroll', handleScroll, { passive: true });
       window.addEventListener('resize', handleScroll, { passive: true });
 
@@ -58,12 +54,15 @@ export const Section = forwardRef<HTMLElement, SectionType>(
       };
     }, []);
 
+    // Assert colour when this section is active and the footer is not taking over.
+    // Watching footerActive means we re-assert when the footer deactivates (scroll up),
+    // fixing the case where isActive stayed true but the effect never re-ran.
     useEffect(() => {
-      if (isActive) {
+      if (isActive && !footerActive) {
         setBgColor(bgColor);
         setTextColor(textColor);
       }
-    }, [isActive, bgColor, textColor, setBgColor, setTextColor]);
+    }, [isActive, footerActive, bgColor, textColor, setBgColor, setTextColor]);
 
     const setRefs = (node: HTMLElement | null) => {
       sectionRef.current = node;

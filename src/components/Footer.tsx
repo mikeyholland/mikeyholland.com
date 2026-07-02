@@ -23,7 +23,7 @@ const stagger = {
 };
 
 export default function Footer() {
-  const { setBgColor } = useContext(BgContext);
+  const { setBgColor, setFooterActive } = useContext(BgContext);
   const { setTextColor } = useContext(TextContext);
   const ref = useRef<HTMLElement>(null);
 
@@ -34,12 +34,10 @@ export default function Footer() {
     const handleScroll = () => {
       const rect = el.getBoundingClientRect();
       const stickyPosition = window.innerWidth < 768 ? 32 : 64;
-      // Use viewport height so footer activates when visible at any screen size.
-      // A fixed px offset fails on tall viewports where the footer never scrolls
-      // close to the top (min rect.top = viewport_height - footer_height).
       const isActive =
         rect.top < window.innerHeight && rect.bottom > stickyPosition;
 
+      setFooterActive(isActive);
       if (isActive) {
         setBgColor('#F1FAEE');
         setTextColor('Black');
@@ -54,7 +52,7 @@ export default function Footer() {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleScroll);
     };
-  }, [setBgColor, setTextColor]);
+  }, [setBgColor, setTextColor, setFooterActive]);
 
   return (
     <footer
